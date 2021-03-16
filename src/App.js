@@ -7,6 +7,7 @@ import jsTPS from './common/jsTPS' // WE NEED THIS TOO
 import Navbar from './components/Navbar'
 import LeftSidebar from './components/LeftSidebar'
 import Workspace from './components/Workspace'
+import addItem_Transaction from './common/addItem_Transaction'
 {/*import ItemsListHeaderComponent from './components/ItemsListHeaderComponent'
 import ItemsListComponent from './components/ItemsListComponent'
 import ListsComponent from './components/ListsComponent'
@@ -103,6 +104,30 @@ class App extends Component {
     return newToDoListItem;
   }
 
+  addNewItemTransaction = () => {
+    let newTransaction = new addItem_Transaction(this);
+    this.tps.addTransaction(newTransaction);
+  }
+
+  addNewItem = () => {
+    let newItem = this.makeNewToDoListItem();
+    let newCurrentList = this.state.currentList;
+    newCurrentList.items[newCurrentList.items.length] = newItem;
+    console.log(newCurrentList);
+    let newListOfLists = this.state.toDoLists.map((toDoList) => {
+      if(toDoList === this.state.currentList) {
+        toDoList = newCurrentList;
+      }
+    })
+
+    console.log(this);
+
+    this.setState({
+      listOfLists: newListOfLists,
+      currentList: newCurrentList
+    })
+  }
+
   // THIS IS A CALLBACK FUNCTION FOR AFTER AN EDIT TO A LIST
   afterToDoListsChangeComplete = () => {
     console.log("App updated currentToDoList: " + this.state.currentList);
@@ -122,7 +147,10 @@ class App extends Component {
           loadToDoListCallback={this.loadToDoList}
           addNewListCallback={this.addNewList}
         />
-        <Workspace toDoListItems={items} />
+        <Workspace 
+          toDoListItems={items}
+          addNewItemCallback={this.addNewItemTransaction}
+        />
       </div>
     );
   }
