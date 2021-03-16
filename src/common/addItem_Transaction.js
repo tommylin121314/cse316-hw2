@@ -10,12 +10,11 @@ export default class addItem_Transaction extends jsTPS_Transaction {
     }
 
     doTransaction() {
-        this.app.addNewItem();
-        console.log("doing transaction");
+        this.id = this.app.addNewItem();
     }
 
     undoTransaction() {
-        
+        this.app.deleteItem(this.id);
     }
 
 }

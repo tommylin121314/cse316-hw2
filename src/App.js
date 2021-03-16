@@ -113,6 +113,9 @@ class App extends Component {
 
   addNewItem = () => {
     let newItem = this.makeNewToDoListItem();
+    let newId = this.state.nextListItemId++;
+    newItem.id = newId;
+
     let newCurrentList = this.state.currentList;
     newCurrentList.items[newCurrentList.items.length] = newItem;
     console.log(newCurrentList);
@@ -122,12 +125,12 @@ class App extends Component {
       }
     })
 
-    console.log(this);
-
     this.setState({
       listOfLists: newListOfLists,
       currentList: newCurrentList
     })
+
+    return newId;
   }
 
   deleteItemTransaction = (id) => {
@@ -157,6 +160,7 @@ class App extends Component {
   }
 
   swapItemTransaction = (id, up) => {
+    console.log(id);
     let index = this.indexOfId(id);
     let newIndex = index;
     if(up) {
@@ -167,7 +171,7 @@ class App extends Component {
     }
 
     if(newIndex < 0 || newIndex > this.state.currentList.items.length - 1) {
-      console.log("dont do that")
+      return;
     }
     else {
       let newTransaction = new swapItem_Transaction(this, index, newIndex);
