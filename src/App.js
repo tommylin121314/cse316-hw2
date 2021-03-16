@@ -191,6 +191,10 @@ class App extends Component {
     this.tps.undoTransaction();
   }
 
+  redoTransaction = () => {
+    this.tps.doTransaction();
+  }
+
   // THIS IS A CALLBACK FUNCTION FOR AFTER AN EDIT TO A LIST
   afterToDoListsChangeComplete = () => {
     console.log("App updated currentToDoList: " + this.state.currentList);
@@ -215,6 +219,7 @@ class App extends Component {
           addNewItemCallback={this.addNewItemTransaction}
           deleteItemCallback={this.deleteItemTransaction}
           undoTransactionCallback={this.undoTransaction}
+          redoTransactionCallback={this.redoTransaction}
         />
       </div>
     );

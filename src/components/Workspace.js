@@ -20,6 +20,10 @@ class Workspace extends Component {
         this.props.undoTransactionCallback();
     }
 
+    handleRedoTransaction = () => {
+        this.props.redoTransactionCallback();
+    }
+
     render() {
         return (
             <div id="workspace">
@@ -31,7 +35,9 @@ class Workspace extends Component {
                         <Undo id="undo-button" className="list-item-control material-icons todo-button" 
                             onClick={this.handleUndoTransaction}
                         />
-                        <Redo id="redo-button" className="list-item-control material-icons todo-button" />
+                        <Redo id="redo-button" className="list-item-control material-icons todo-button" 
+                            onClick={this.handleRedoTransaction}
+                        />
                         <AddBox id="add-item-button" className="list-item-control material-icons todo-button" 
                             onClick={this.handleAddNewItem}
                         />
