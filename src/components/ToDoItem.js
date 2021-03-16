@@ -22,6 +22,16 @@ class ToDoItem extends Component {
         this.props.deleteItemCallback(id.slice(15));
     }
 
+    handleMoveItemUp = (e) => {
+        let id = e.currentTarget.parentElement.parentElement.id.slice(15);
+        this.props.swapItemCallback(id, true);
+    }
+
+    handleMoveItemDown = (e) => {
+        let id = e.currentTarget.parentElement.parentElement.id.slice(15);
+        this.props.swapItemCallback(id, false);
+    }
+
     render() {
         // DISPLAY WHERE WE ARE
         console.log("\t\t\tToDoItem render");
@@ -37,8 +47,12 @@ class ToDoItem extends Component {
                 <div className='item-col status-col' className={statusType}>{listItem.status}</div>
                 <div className='item-col test-4-col'></div>
                 <div className='item-col list-controls-col'>
-                    <KeyboardArrowUp className='list-item-control todo-button' />
-                    <KeyboardArrowDown className='list-item-control todo-button' />
+                    <KeyboardArrowUp className='list-item-control todo-button' 
+                        onClick={this.handleMoveItemUp}
+                    />
+                    <KeyboardArrowDown className='list-item-control todo-button' 
+                        onClick={this.handleMoveItemDown}
+                    />
                     <Close className='list-item-control todo-button' 
                         onClick={this.handleDeleteItem}
                     />

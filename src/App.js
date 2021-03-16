@@ -9,6 +9,7 @@ import LeftSidebar from './components/LeftSidebar'
 import Workspace from './components/Workspace'
 import addItem_Transaction from './common/addItem_Transaction'
 import deleteItem_Transaction from './common/deleteItem_Transaction'
+import swapItem_Transaction from './common/swapItem_Transaction'
 {/*import ItemsListHeaderComponent from './components/ItemsListHeaderComponent'
 import ItemsListComponent from './components/ItemsListComponent'
 import ListsComponent from './components/ListsComponent'
@@ -155,6 +156,45 @@ class App extends Component {
     return removedItem;
   }
 
+  swapItemTransaction = (id, up) => {
+    let index = this.indexOfId(id);
+    let newIndex = index;
+    if(up) {
+      newIndex--;
+    }
+    else {
+      newIndex++;
+    }
+
+    if(newIndex < 0 || newIndex > this.state.currentList.items.length - 1) {
+      console.log("dont do that")
+    }
+    else {
+      let newTransaction = new swapItem_Transaction(this, index, newIndex);
+      this.tps.addTransaction(newTransaction);
+    }
+  }
+
+  swapItems = (indexOne, indexTwo) => {
+    let newCurrentList = this.state.currentList;
+    let newCurrentItems = this.state.currentList.items;
+    let temp = newCurrentItems[indexOne];
+    newCurrentItems[indexOne] = newCurrentItems[indexTwo];
+    newCurrentItems[indexTwo] = temp;
+    newCurrentList.items = newCurrentItems;
+
+    let newListOfLists = this.state.toDoLists.map((toDoList) => {
+      if(toDoList === this.state.currentList) {
+        toDoList = newCurrentList;
+      }
+    })
+
+    this.setState({
+      currentList: newCurrentList,
+      listOfLists: newListOfLists
+    })
+  }
+
   insertItem = (item, index) => {
     console.log(item);
     let newCurrentListItems = this.state.currentList.items;
@@ -218,6 +258,7 @@ class App extends Component {
           toDoListItems={items}
           addNewItemCallback={this.addNewItemTransaction}
           deleteItemCallback={this.deleteItemTransaction}
+          swapItemCallback={this.swapItemTransaction}
           undoTransactionCallback={this.undoTransaction}
           redoTransactionCallback={this.redoTransaction}
         />
