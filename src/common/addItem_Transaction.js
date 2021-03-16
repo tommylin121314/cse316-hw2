@@ -15,6 +15,7 @@ export default class addItem_Transaction extends jsTPS_Transaction {
 
     undoTransaction() {
         this.app.deleteItem(this.id);
+        this.app.state.nextListItemId--;
     }
 
 }
