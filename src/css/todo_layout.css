@@ -109,3 +109,65 @@
 .list-item-control {
     width: 20%;
 }
+
+#delete-modal {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+}
+
+#delete-modal-contents {
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    width: 400px;
+    height: 200px;
+    transform: translate(-50%, -50%);
+    color: #e9edf0;
+    background-color: #353a44;
+    font-size: 20px;
+}
+
+#delete-prompt {
+    color: #ffc819;
+    position: relative;
+    top:30px;
+    left:30px;
+    font-size: 25px;
+}
+
+#close-modal {
+    position: relative;
+    left: 320px;
+    font-size: 25px;
+    width: 30px;
+}
+
+#line {
+    position:relative;
+    top:20px;
+}
+
+#confirm {
+    position: relative;
+    top:50px;
+    left: 50px;
+    width: 100px;
+}
+
+#cancel {
+    position: relative;
+    top: 25px;
+    left: 270px;
+    width: 100px;
+}
+
+.modal-button:hover {
+    background-color: rgba(200,200,200,0.5);
+    text-align: center;
+}

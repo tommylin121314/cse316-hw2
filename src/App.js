@@ -13,6 +13,7 @@ import swapItem_Transaction from './common/swapItem_Transaction'
 import changeStatus_Transaction from './common/changeStatus_Transaction'
 import changeDate_Transaction from './common/changeDate_Transaction'
 import editDescription_Transaction from './common/editDescription_Transaction'
+import DeleteModal from './components/DeleteModal'
 {/*import ItemsListHeaderComponent from './components/ItemsListHeaderComponent'
 import ItemsListComponent from './components/ItemsListComponent'
 import ListsComponent from './components/ListsComponent'
@@ -58,7 +59,8 @@ class App extends Component {
       currentList: {items: []},
       nextListId: highListId+1,
       nextListItemId: highListItemId+1,
-      useVerboseFeedback: true
+      useVerboseFeedback: true,
+      modalVisible: false
     }
   }
 
@@ -307,6 +309,36 @@ class App extends Component {
 
   }
 
+  openModal = () => {
+    this.setState({
+      modalVisible: true
+    })
+  }
+
+  closeModal = () => {
+    this.setState({
+      modalVisible: false
+    })
+  }
+
+  deleteList = () => {
+    let newListOfLists = this.state.toDoLists;
+    console.log(newListOfLists);
+    for(let i = 0; i < newListOfLists.length; i++) {
+      console.log(newListOfLists[i]);
+      newListOfLists[i] = newListOfLists[i + 1];
+    }
+    newListOfLists.length = newListOfLists.length - 1;
+    console.log(newListOfLists);
+
+    this.setState({
+      toDoList: newListOfLists,
+      currentList: { items: [] },
+      modalVisible: false
+    })
+
+  }
+
   indexOfId = (id) => {
     let todoItems = this.state.currentList.items;
     for(let i = 0; i < todoItems.length; i++) {
@@ -338,6 +370,11 @@ class App extends Component {
     let items = this.state.currentList.items;
     return (
       <div id="root">
+        <DeleteModal 
+          visible={this.state.modalVisible}
+          closeModal={this.closeModal}
+          deleteListCallback={this.deleteList}
+        />
         <Navbar />
         <LeftSidebar 
           toDoLists={this.state.toDoLists}
@@ -354,6 +391,7 @@ class App extends Component {
           editDescriptionCallback={this.editDescriptionTransaction}
           undoTransactionCallback={this.undoTransaction}
           redoTransactionCallback={this.redoTransaction}
+          openModal={this.openModal}
         />
       </div>
     );

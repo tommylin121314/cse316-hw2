@@ -24,6 +24,10 @@ class Workspace extends Component {
         this.props.redoTransactionCallback();
     }
 
+    handleOpenModal = () => {
+        this.props.openModal();
+    }
+
     render() {
         return (
             <div id="workspace">
@@ -41,7 +45,9 @@ class Workspace extends Component {
                         <AddBox id="add-item-button" className="list-item-control material-icons todo-button" 
                             onClick={this.handleAddNewItem}
                         />
-                        <Delete id="delete-list-button" className="list-item-control material-icons todo-button" />
+                        <Delete id="delete-list-button" className="list-item-control material-icons todo-button" 
+                            onClick={this.handleOpenModal}
+                        />
                         <Close id="close-list-button" className="list-item-control material-icons todo-button" />
                     </div>
                 </div>
