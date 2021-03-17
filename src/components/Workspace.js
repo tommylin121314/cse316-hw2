@@ -53,6 +53,7 @@ class Workspace extends Component {
                             toDoListItem={toDoListItem}     // PASS THE ITEM TO THE CHILDREN
                             deleteItemCallback={this.props.deleteItemCallback}
                             swapItemCallback={this.props.swapItemCallback}
+                            changeStatusCallback={this.props.changeStatusCallback}
                         />))
                     }
                 </div>

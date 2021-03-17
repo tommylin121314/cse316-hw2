@@ -10,6 +10,7 @@ import Workspace from './components/Workspace'
 import addItem_Transaction from './common/addItem_Transaction'
 import deleteItem_Transaction from './common/deleteItem_Transaction'
 import swapItem_Transaction from './common/swapItem_Transaction'
+import changeStatus_Transaction from './common/changeStatus_Transaction'
 {/*import ItemsListHeaderComponent from './components/ItemsListHeaderComponent'
 import ItemsListComponent from './components/ItemsListComponent'
 import ListsComponent from './components/ListsComponent'
@@ -32,6 +33,7 @@ class App extends Component {
       recentLists = JSON.stringify(testData.toDoLists);
       localStorage.setItem("toDoLists", recentLists);
     }
+    console.log("recentLists: " + recentLists);
     recentLists = JSON.parse(recentLists);
 
     // FIND OUT WHAT THE HIGHEST ID NUMBERS ARE FOR LISTS
@@ -199,8 +201,35 @@ class App extends Component {
     })
   }
 
+  changeStatusTransaction = (id) => {
+    let newTransaction = new changeStatus_Transaction(this, id);
+    this.tps.addTransaction(newTransaction);
+  }
+
+  changeStatus = (id) => {
+    let newCurrentList = this.state.currentList;
+    let index = this.indexOfId(id);
+    if(newCurrentList.items[index].status === 'complete') {
+      newCurrentList.items[index].status = 'incomplete';
+    }
+    else {
+      newCurrentList.items[index].status = 'complete';
+    }
+
+    let newListOfLists = this.state.toDoLists.map((toDoList) => {
+      if(toDoList === this.state.currentList) {
+        toDoList = newCurrentList;
+      }
+    })
+
+    this.setState({
+      currentList: newCurrentList,
+      listOfLists: newListOfLists
+    })
+
+  }
+
   insertItem = (item, index) => {
-    console.log(item);
     let newCurrentListItems = this.state.currentList.items;
     for(let i = newCurrentListItems.length; i > index; i--) {
       newCurrentListItems[i] = newCurrentListItems[i-1];
@@ -263,6 +292,7 @@ class App extends Component {
           addNewItemCallback={this.addNewItemTransaction}
           deleteItemCallback={this.deleteItemTransaction}
           swapItemCallback={this.swapItemTransaction}
+          changeStatusCallback={this.changeStatusTransaction}
           undoTransactionCallback={this.undoTransaction}
           redoTransactionCallback={this.redoTransaction}
         />

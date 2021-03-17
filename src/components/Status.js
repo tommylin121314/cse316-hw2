@@ -6,8 +6,9 @@ export default class Status extends Component {
         super(props);
     }
 
-    handleSelectOnChange = () => {
-        console.log("CHANGED STATUS");
+    handleSelectOnChange = (e) => {
+        let id = e.currentTarget.parentElement.parentElement.id.slice(15);
+        this.props.changeStatusCallback(id);
     }
 
     render() {

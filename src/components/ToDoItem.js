@@ -44,7 +44,7 @@ class ToDoItem extends Component {
             <div id={'todo-list-item-' + listItem.id} className='list-item-card'>
                 <TaskName item={listItem}/>
                 <DueDate item={listItem}/>
-                <Status item={listItem}/>
+                <Status item={listItem} changeStatusCallback={this.props.changeStatusCallback}/>
                 <div className='item-col test-4-col'></div>
                 <div className='item-col list-controls-col'>
                     <KeyboardArrowUp className='list-item-control todo-button' 
