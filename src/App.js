@@ -11,6 +11,7 @@ import addItem_Transaction from './common/addItem_Transaction'
 import deleteItem_Transaction from './common/deleteItem_Transaction'
 import swapItem_Transaction from './common/swapItem_Transaction'
 import changeStatus_Transaction from './common/changeStatus_Transaction'
+import changeDate_Transaction from './common/changeDate_Transaction'
 {/*import ItemsListHeaderComponent from './components/ItemsListHeaderComponent'
 import ItemsListComponent from './components/ItemsListComponent'
 import ListsComponent from './components/ListsComponent'
@@ -33,7 +34,6 @@ class App extends Component {
       recentLists = JSON.stringify(testData.toDoLists);
       localStorage.setItem("toDoLists", recentLists);
     }
-    console.log("recentLists: " + recentLists);
     recentLists = JSON.parse(recentLists);
 
     // FIND OUT WHAT THE HIGHEST ID NUMBERS ARE FOR LISTS
@@ -229,6 +229,29 @@ class App extends Component {
 
   }
 
+  changeDateTransaction = (id, oldDate, newDate) => {
+    let newTransaction = new changeDate_Transaction(this, id, oldDate, newDate);
+    this.tps.addTransaction(newTransaction);
+  }
+
+  changeDueDate = (id, date) => {
+    let newCurrentList = this.state.currentList;
+    let index = this.indexOfId(id);
+    newCurrentList.items[index].dueDate = date;
+
+    let newListOfLists = this.state.toDoLists.map((toDoList) => {
+      if(toDoList === this.state.currentList) {
+        toDoList = newCurrentList;
+      }
+    })
+
+    this.setState({
+      currentList: newCurrentList,
+      listOfLists: newListOfLists
+    })
+
+  }
+
   insertItem = (item, index) => {
     let newCurrentListItems = this.state.currentList.items;
     for(let i = newCurrentListItems.length; i > index; i--) {
@@ -293,6 +316,7 @@ class App extends Component {
           deleteItemCallback={this.deleteItemTransaction}
           swapItemCallback={this.swapItemTransaction}
           changeStatusCallback={this.changeStatusTransaction}
+          changeDateCallback={this.changeDateTransaction}
           undoTransactionCallback={this.undoTransaction}
           redoTransactionCallback={this.redoTransaction}
         />
