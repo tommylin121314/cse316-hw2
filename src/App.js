@@ -72,6 +72,11 @@ class App extends Component {
     );
     nextLists.unshift(toDoList);
 
+    nextLists[0].highlighted = true;
+    for(let i = 1; i < nextLists.length; i++) {
+      nextLists[i].highlighted = false;
+    }
+
     this.setState({
       toDoLists: nextLists,
       currentList: toDoList
@@ -82,6 +87,11 @@ class App extends Component {
     let newToDoListInList = [this.makeNewToDoList()];
     let newToDoListsList = [...newToDoListInList, ...this.state.toDoLists];
     let newToDoList = newToDoListInList[0];
+
+    newToDoListsList[0].highlighted = true;
+    for(let i = 1; i < newToDoListsList.length; i++) {
+      newToDoListsList[i].highlighted = false;
+    }
 
     // AND SET THE STATE, WHICH SHOULD FORCE A render
     this.setState({
