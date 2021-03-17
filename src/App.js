@@ -12,6 +12,7 @@ import deleteItem_Transaction from './common/deleteItem_Transaction'
 import swapItem_Transaction from './common/swapItem_Transaction'
 import changeStatus_Transaction from './common/changeStatus_Transaction'
 import changeDate_Transaction from './common/changeDate_Transaction'
+import editDescription_Transaction from './common/editDescription_Transaction'
 {/*import ItemsListHeaderComponent from './components/ItemsListHeaderComponent'
 import ItemsListComponent from './components/ItemsListComponent'
 import ListsComponent from './components/ListsComponent'
@@ -115,7 +116,7 @@ class App extends Component {
 
   addNewItem = () => {
     let newItem = this.makeNewToDoListItem();
-    let newId = this.state.nextListItemId++;
+    let newId = this.state.nextListItemId+1;
     newItem.id = newId;
 
     let newCurrentList = this.state.currentList;
@@ -129,7 +130,8 @@ class App extends Component {
 
     this.setState({
       listOfLists: newListOfLists,
-      currentList: newCurrentList
+      currentList: newCurrentList,
+      nextListItemId: this.state.nextListItemId + 1
     })
 
     return newId;
@@ -252,6 +254,28 @@ class App extends Component {
 
   }
 
+  editDescriptionTransaction = (id, newName, oldName) => {
+    let newTransaction = new editDescription_Transaction(this, id, newName, oldName);
+    this.tps.addTransaction(newTransaction);
+  }
+
+  editDescription = (id, name) => {
+    let newCurrentList = this.state.currentList;
+    let index = this.indexOfId(id);
+    newCurrentList.items[index].description = name;
+
+    let newListOfLists = this.state.toDoLists.map((toDoList) => {
+      if(toDoList === this.state.currentList) {
+        toDoList = newCurrentList;
+      }
+    })
+
+    this.setState({
+      currentList: newCurrentList,
+      listOfLists: newListOfLists
+    })
+  }
+
   insertItem = (item, index) => {
     let newCurrentListItems = this.state.currentList.items;
     for(let i = newCurrentListItems.length; i > index; i--) {
@@ -317,6 +341,7 @@ class App extends Component {
           swapItemCallback={this.swapItemTransaction}
           changeStatusCallback={this.changeStatusTransaction}
           changeDateCallback={this.changeDateTransaction}
+          editDescriptionCallback={this.editDescriptionTransaction}
           undoTransactionCallback={this.undoTransaction}
           redoTransactionCallback={this.redoTransaction}
         />

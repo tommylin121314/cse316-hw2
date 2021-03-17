@@ -55,6 +55,7 @@ class Workspace extends Component {
                             swapItemCallback={this.props.swapItemCallback}
                             changeStatusCallback={this.props.changeStatusCallback}
                             changeDateCallback={this.props.changeDateCallback}
+                            editDescriptionCallback={this.props.editDescriptionCallback}
                         />))
                     }
                 </div>

@@ -42,7 +42,7 @@ class ToDoItem extends Component {
 
         return (
             <div id={'todo-list-item-' + listItem.id} className='list-item-card'>
-                <TaskName item={listItem}/>
+                <TaskName item={listItem} editDescriptionCallback={this.props.editDescriptionCallback}/>
                 <DueDate item={listItem} changeDateCallback={this.props.changeDateCallback}/>
                 <Status item={listItem} changeStatusCallback={this.props.changeStatusCallback}/>
                 <div className='item-col test-4-col'></div>
