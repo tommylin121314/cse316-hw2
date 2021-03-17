@@ -6,14 +6,26 @@ export default class Status extends Component {
         super(props);
     }
 
+    handleSelectOnChange = () => {
+        console.log("CHANGED STATUS");
+    }
+
     render() {
         let listItem = this.props.item;
         let statusType = "status-complete";
-        if (listItem.status === "incomplete")
+        let statusBool = true;
+        if (listItem.status === "incomplete") {
+            statusBool = false;
             statusType = "status-incomplete";
+        }
 
         return (
-            <div className='item-col status-col' className={statusType}>{listItem.status}</div>
+            <div className='item-col status-col' className={statusType}>
+                <select onChange={this.handleSelectOnChange}>
+                    <option selected={!statusBool}>incomplete</option>
+                    <option selected={statusBool}>complete</option>
+                </select>
+            </div>
         )
     }
 }
