@@ -48,7 +48,9 @@ class Workspace extends Component {
                         <Delete id="delete-list-button" className="list-item-control material-icons todo-button" 
                             onClick={this.handleOpenModal}
                         />
-                        <Close id="close-list-button" className="list-item-control material-icons todo-button" />
+                        <Close id="close-list-button" className="list-item-control material-icons todo-button" 
+                            onClick={this.props.closeListCallback}
+                        />
                     </div>
                 </div>
                 <div id="todo-list-items-div">

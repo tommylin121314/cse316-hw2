@@ -339,6 +339,19 @@ class App extends Component {
 
   }
 
+  closeList = () => {
+    let listOfLists = this.state.toDoLists;
+    for(let i = 0; i < listOfLists.length; i++) {
+      listOfLists[i].highlighted = false;
+    }
+
+    this.setState({
+      toDoList: listOfLists,
+      currentList: { items: [] }
+    })
+
+  }
+
   indexOfId = (id) => {
     let todoItems = this.state.currentList.items;
     for(let i = 0; i < todoItems.length; i++) {
@@ -392,6 +405,7 @@ class App extends Component {
           undoTransactionCallback={this.undoTransaction}
           redoTransactionCallback={this.redoTransaction}
           openModal={this.openModal}
+          closeListCallback={this.closeList}
         />
       </div>
     );
