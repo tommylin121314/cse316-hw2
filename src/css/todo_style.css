@@ -110,3 +110,8 @@
 #add-item-button, #delete-list-button, #close-list-button {
     text-align: center;
 }
+
+.disabled-button {
+    color: #696969;
+    pointer-events: none;
+}

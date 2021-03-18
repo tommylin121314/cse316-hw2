@@ -47,10 +47,10 @@ class ToDoItem extends Component {
                 <Status item={listItem} changeStatusCallback={this.props.changeStatusCallback}/>
                 <div className='item-col test-4-col'></div>
                 <div className='item-col list-controls-col'>
-                    <KeyboardArrowUp className='list-item-control todo-button' 
+                    <KeyboardArrowUp className={this.props.index === 0 ? 'list-item-control todo-button disabled-button' : 'list-item-control todo-button'}
                         onClick={this.handleMoveItemUp}
                     />
-                    <KeyboardArrowDown className='list-item-control todo-button' 
+                    <KeyboardArrowDown className={this.props.index === this.props.lastIndex ? 'list-item-control todo-button disabled-button' : 'list-item-control todo-button'}
                         onClick={this.handleMoveItemDown}
                     />
                     <Close className='list-item-control todo-button' 

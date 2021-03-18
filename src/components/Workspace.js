@@ -55,9 +55,11 @@ class Workspace extends Component {
                 </div>
                 <div id="todo-list-items-div">
                     {
-                        this.props.toDoListItems.map((toDoListItem) => (
+                        this.props.toDoListItems.map((toDoListItem, index) => (
                         <ToDoItem
                             key={toDoListItem.id}
+                            index={index}
+                            lastIndex={this.props.toDoListItems.length - 1}
                             toDoListItem={toDoListItem}     // PASS THE ITEM TO THE CHILDREN
                             deleteItemCallback={this.props.deleteItemCallback}
                             swapItemCallback={this.props.swapItemCallback}
