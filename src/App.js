@@ -66,7 +66,7 @@ class App extends Component {
 
   // WILL LOAD THE SELECTED LIST
   loadToDoList = (toDoList) => {
-    console.log("loading " + toDoList);
+    console.log("loading list id " + toDoList.id);
 
     // MAKE SURE toDoList IS AT THE TOP OF THE STACK BY REMOVING THEN PREPENDING
     const nextLists = this.state.toDoLists.filter(testList =>
@@ -95,6 +95,8 @@ class App extends Component {
       newToDoListsList[i].highlighted = false;
     }
 
+    console.log(newToDoList);
+    console.log("added list id " + newToDoList.id);
     // AND SET THE STATE, WHICH SHOULD FORCE A render
     this.setState({
       toDoLists: newToDoListsList,
@@ -105,7 +107,7 @@ class App extends Component {
 
   makeNewToDoList = () => {
     let newToDoList = {
-      id: this.highListId,
+      id: this.state.nextListId,
       name: 'Untitled',
       items: []
     };
@@ -394,7 +396,7 @@ class App extends Component {
           closeListCallback={this.closeList}
           canUndo={this.tps.hasTransactionToUndo()}
           canRedo={this.tps.hasTransactionToRedo()}
-          listOpen={this.state.currentList.items.length === 0}
+          listOpen={this.state.currentList.id === undefined}
         />
       </div>
     );
