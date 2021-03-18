@@ -133,12 +133,7 @@ class App extends Component {
 
     let newCurrentList = this.state.currentList;
     newCurrentList.items[newCurrentList.items.length] = newItem;
-    console.log(newCurrentList);
-    let newListOfLists = this.state.toDoLists.map((toDoList) => {
-      if(toDoList === this.state.currentList) {
-        toDoList = newCurrentList;
-      }
-    })
+    let newListOfLists = this.state.toDoLists.map((toDoList) => toDoList.id === this.state.currentList.id ? newCurrentList : toDoList)
 
     this.setState({
       toDoLists: newListOfLists,
@@ -160,18 +155,13 @@ class App extends Component {
     let newCurrentListItems = this.state.currentList.items.filter(item => item.id != id);
     let newCurrentList = this.state.currentList;
     newCurrentList.items = newCurrentListItems;
-    let newListOfLists = this.state.toDoLists.map((toDoList) => {
-      if(toDoList === this.state.currentList) {
-        toDoList = newCurrentList;
-      }
-    })
+    let newListOfLists = this.state.toDoLists.map((toDoList) => toDoList.id === this.state.currentList.id ? newCurrentList : toDoList)
 
     this.setState({
       currentList: newCurrentList,
       toDoLists: newListOfLists
     })
 
-    console.log(removedItem);
     return removedItem;
   }
 
@@ -203,11 +193,7 @@ class App extends Component {
     newCurrentItems[indexTwo] = temp;
     newCurrentList.items = newCurrentItems;
 
-    let newListOfLists = this.state.toDoLists.map((toDoList) => {
-      if(toDoList === this.state.currentList) {
-        toDoList = newCurrentList;
-      }
-    })
+    let newListOfLists = this.state.toDoLists.map((toDoList) => toDoList.id === this.state.currentList.id ? newCurrentList : toDoList)
 
     this.setState({
       currentList: newCurrentList,
@@ -230,11 +216,7 @@ class App extends Component {
       newCurrentList.items[index].status = 'complete';
     }
 
-    let newListOfLists = this.state.toDoLists.map((toDoList) => {
-      if(toDoList === this.state.currentList) {
-        toDoList = newCurrentList;
-      }
-    })
+    let newListOfLists = this.state.toDoLists.map((toDoList) => toDoList.id === this.state.currentList.id ? newCurrentList : toDoList)
 
     this.setState({
       currentList: newCurrentList,
@@ -253,11 +235,7 @@ class App extends Component {
     let index = this.indexOfId(id);
     newCurrentList.items[index].dueDate = date;
 
-    let newListOfLists = this.state.toDoLists.map((toDoList) => {
-      if(toDoList === this.state.currentList) {
-        toDoList = newCurrentList;
-      }
-    })
+    let newListOfLists = this.state.toDoLists.map((toDoList) => toDoList.id === this.state.currentList.id ? newCurrentList : toDoList)
 
     this.setState({
       currentList: newCurrentList,
@@ -276,11 +254,7 @@ class App extends Component {
     let index = this.indexOfId(id);
     newCurrentList.items[index].description = name;
 
-    let newListOfLists = this.state.toDoLists.map((toDoList) => {
-      if(toDoList === this.state.currentList) {
-        toDoList = newCurrentList;
-      }
-    })
+    let newListOfLists = this.state.toDoLists.map((toDoList) => toDoList.id === this.state.currentList.id ? newCurrentList : toDoList)
 
     this.setState({
       currentList: newCurrentList,
@@ -296,11 +270,7 @@ class App extends Component {
     newCurrentListItems[index] = item;
     let newCurrentList = this.state.currentList;
     newCurrentList.items = newCurrentListItems;
-    let newListOfLists = this.state.toDoLists.map((toDoList) => {
-      if(toDoList === this.state.currentList) {
-        toDoList = newCurrentList;
-      }
-    })
+    let newListOfLists = this.state.toDoLists.map((toDoList) => toDoList.id === this.state.currentList.id ? newCurrentList : toDoList)
 
     this.setState({
       currentList: newCurrentList,
@@ -356,7 +326,9 @@ class App extends Component {
     let newListsList = this.state.toDoLists;
     for(let i = 0; i < newListsList.length; i++) {
       if(newListsList[i].id === id) {
+        console.log("list at index " + i + " :" + newListsList[i].name);
         newListsList[i].name = name;
+        console.log("list at index " + i + " after change:" + newListsList[i].name);
       }
     }
 

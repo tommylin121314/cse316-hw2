@@ -20,6 +20,7 @@ class ListLink extends Component {
 
     handleOnBlur = (e) => {
         let name = e.currentTarget.innerText;
+        console.log(name);
         this.props.changeListNameCallback(this.props.toDoList.id, name);
     }
 
