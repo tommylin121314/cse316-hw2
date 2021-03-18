@@ -44,13 +44,16 @@ class Workspace extends Component {
                             className={!(this.props.canRedo) ? "list-item-control material-icons todo-button disabled-button" : "list-item-control material-icons todo-button"}
                             onClick={this.handleRedoTransaction}
                         />
-                        <AddBox id="add-item-button" className="list-item-control material-icons todo-button" 
+                        <AddBox id="add-item-button" 
+                            className={this.props.listOpen ? "list-item-control material-icons todo-button disabled-button" : "list-item-control material-icons todo-button"}
                             onClick={this.handleAddNewItem}
                         />
-                        <Delete id="delete-list-button" className="list-item-control material-icons todo-button" 
+                        <Delete id="delete-list-button"
+                            className={this.props.listOpen ? "list-item-control material-icons todo-button disabled-button" : "list-item-control material-icons todo-button"}
                             onClick={this.handleOpenModal}
                         />
-                        <Close id="close-list-button" className="list-item-control material-icons todo-button" 
+                        <Close id="close-list-button"
+                            className={this.props.listOpen ? "list-item-control material-icons todo-button disabled-button" : "list-item-control material-icons todo-button"}
                             onClick={this.props.closeListCallback}
                         />
                     </div>

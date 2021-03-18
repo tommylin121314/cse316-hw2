@@ -408,6 +408,7 @@ class App extends Component {
           closeListCallback={this.closeList}
           canUndo={this.tps.hasTransactionToUndo()}
           canRedo={this.tps.hasTransactionToRedo()}
+          listOpen={this.state.currentList.items.length === 0}
         />
       </div>
     );
