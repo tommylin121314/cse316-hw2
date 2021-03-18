@@ -36,7 +36,7 @@ class ListLink extends Component {
                 onClick={this.handleLoadList}
                 style={this.props.toDoList.highlighted ? {backgroundColor: '#ffc819', color: '#000000'} : {backgroundColor: '#353a44', color: '#e9edf0'}}
             >
-                {this.props.toDoList.name}<br />
+                {this.props.toDoList.name}
             </div>
         )
     }

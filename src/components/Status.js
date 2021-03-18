@@ -22,9 +22,9 @@ export default class Status extends Component {
 
         return (
             <div className='item-col status-col' className={statusType}>
-                <select onChange={this.handleSelectOnChange}>
-                    <option selected={!statusBool}>incomplete</option>
-                    <option selected={statusBool}>complete</option>
+                <select className='status-select' style={statusBool ? {color: 'dodgerblue'} : {color: 'gold'}} onChange={this.handleSelectOnChange}>
+                    <option style={{color:'#111111'}} selected={!statusBool}>incomplete</option>
+                    <option style={{color:'#111111'}} selected={statusBool}>complete</option>
                 </select>
             </div>
         )
