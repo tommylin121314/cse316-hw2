@@ -121,3 +121,10 @@
     overflow-x: hidden;
     scrollbar-width: none;
 }
+
+.due-date-field {
+    color: var(--swatch-text);
+    background: transparent;
+    border: transparent;
+    font-size: 15px;
+}

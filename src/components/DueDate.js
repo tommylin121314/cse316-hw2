@@ -27,7 +27,7 @@ export default class DueDate extends Component {
     render() {
         return (
             <div className='item-col due-date-col'>
-                <input type='date' onChange={this.handleChangeDate} onClick={this.handleOnFocus} value={this.props.item.dueDate}></input>
+                <input class='due-date-field' type='date' onChange={this.handleChangeDate} onClick={this.handleOnFocus} value={this.props.item.dueDate}></input>
             </div>
         )
     }
