@@ -115,7 +115,7 @@ class App extends Component {
   makeNewToDoListItem = () =>  {
     let newToDoListItem = {
       description: "No Description",
-      dueDate: "none",
+      due_date: "none",
       status: "incomplete"
     };
     return newToDoListItem;
@@ -233,7 +233,7 @@ class App extends Component {
   changeDueDate = (id, date) => {
     let newCurrentList = this.state.currentList;
     let index = this.indexOfId(id);
-    newCurrentList.items[index].dueDate = date;
+    newCurrentList.items[index].due_date = date;
 
     let newListOfLists = this.state.toDoLists.map((toDoList) => toDoList.id === this.state.currentList.id ? newCurrentList : toDoList)
 
