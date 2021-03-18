@@ -31,7 +31,7 @@ class App extends Component {
 
     // CHECK TO SEE IF THERE IS DATA IN LOCAL STORAGE FOR THIS APP
     let recentLists = localStorage.getItem("recentLists");
-    console.log("recentLists: " + recentLists);
+
     if (!recentLists) {
       recentLists = JSON.stringify(testData.toDoLists);
       localStorage.setItem("toDoLists", recentLists);
@@ -43,6 +43,7 @@ class App extends Component {
     let highListItemId = -1;
     for (let i = 0; i < recentLists.length; i++) {
       let toDoList = recentLists[i];
+      toDoList.highlighted = false;
       if (toDoList.id > highListId) {
         highListId = toDoList.id;
       }
@@ -145,7 +146,7 @@ class App extends Component {
       toDoLists: newListOfLists,
       currentList: newCurrentList,
       nextListItemId: this.state.nextListItemId + 1
-    })
+    }, this.afterToDoListsChangeComplete)
 
     return newId;
   }
@@ -166,7 +167,7 @@ class App extends Component {
     this.setState({
       currentList: newCurrentList,
       toDoLists: newListOfLists
-    })
+    }, this.afterToDoListsChangeComplete)
 
     return removedItem;
   }
@@ -204,7 +205,7 @@ class App extends Component {
     this.setState({
       currentList: newCurrentList,
       toDoLists: newListOfLists
-    })
+    }, this.afterToDoListsChangeComplete)
   }
 
   changeStatusTransaction = (id) => {
@@ -227,7 +228,7 @@ class App extends Component {
     this.setState({
       currentList: newCurrentList,
       toDoLists: newListOfLists
-    })
+    }, this.afterToDoListsChangeComplete)
 
   }
 
@@ -246,7 +247,7 @@ class App extends Component {
     this.setState({
       currentList: newCurrentList,
       toDoLists: newListOfLists
-    })
+    }, this.afterToDoListsChangeComplete)
 
   }
 
@@ -265,7 +266,7 @@ class App extends Component {
     this.setState({
       currentList: newCurrentList,
       toDoLists: newListOfLists
-    })
+    }, this.afterToDoListsChangeComplete)
   }
 
   insertItem = (item, index) => {
@@ -281,7 +282,7 @@ class App extends Component {
     this.setState({
       currentList: newCurrentList,
       toDoLists: newListOfLists
-    })
+    }, this.afterToDoListsChangeComplete)
 
   }
 
@@ -311,7 +312,7 @@ class App extends Component {
       toDoLists: newListOfLists,
       currentList: { items: [] },
       modalVisible: false
-    })
+    }, this.afterToDoListsChangeComplete)
 
   }
 
@@ -324,7 +325,7 @@ class App extends Component {
     this.setState({
       toDoLists: listOfLists,
       currentList: { items: [] }
-    })
+    }, this.afterToDoListsChangeComplete)
 
   }
 
@@ -367,7 +368,11 @@ class App extends Component {
 
     // WILL THIS WORK? @todo
     let toDoListsString = JSON.stringify(this.state.toDoLists);
-    localStorage.setItem("recent_work", toDoListsString);
+    localStorage.setItem("recentLists", toDoListsString);
+  }
+
+  afterToDoItemChangeComplete = () => {
+    
   }
 
   render() {
