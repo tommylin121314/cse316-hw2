@@ -115,3 +115,9 @@
     color: #696969;
     pointer-events: none;
 }
+
+.overflow-scroll {
+    overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}

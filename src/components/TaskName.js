@@ -27,7 +27,7 @@ export default class TaskName extends Component {
 
     render() {
         return (
-            <div className='item-col task-col' contentEditable onBlur={this.handleOnBlur} onFocus={this.handleOnFocus}>{this.props.item.description}</div>
+            <div className='item-col task-col overflow-scroll' contentEditable onBlur={this.handleOnBlur} onFocus={this.handleOnFocus}>{this.props.item.description}</div>
         )
     }
 }

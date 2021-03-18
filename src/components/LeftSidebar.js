@@ -24,7 +24,7 @@ class LeftSidebar extends Component {
                             onClick={this.handleAddNewList} />
                     </span>
                 </div>
-                <div id="todo-lists-list">
+                <div id="todo-lists-list" className='overflow-scroll'>
                 {
                     this.props.toDoLists.map((toDoList) => (
                         <ListLink

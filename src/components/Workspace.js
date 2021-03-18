@@ -58,7 +58,7 @@ class Workspace extends Component {
                         />
                     </div>
                 </div>
-                <div id="todo-list-items-div">
+                <div id="todo-list-items-div" class='overflow-scroll'>
                     {
                         this.props.toDoListItems.map((toDoListItem, index) => (
                         <ToDoItem
