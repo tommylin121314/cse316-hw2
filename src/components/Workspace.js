@@ -36,10 +36,12 @@ class Workspace extends Component {
                     <div id="date-col-header" className="item-col todo-button">Due Date</div>
                     <div id="status-col-header" className="item-col todo-button">Status</div>
                     <div className="item-col" display="flex" flexDirection="row" flexWrap="nowrap">
-                        <Undo id="undo-button" className="list-item-control material-icons todo-button" 
+                        <Undo id="undo-button"
+                            className={!(this.props.canUndo) ? "list-item-control material-icons todo-button disabled-button" : "list-item-control material-icons todo-button"}
                             onClick={this.handleUndoTransaction}
                         />
-                        <Redo id="redo-button" className="list-item-control material-icons todo-button" 
+                        <Redo id="redo-button"
+                            className={!(this.props.canRedo) ? "list-item-control material-icons todo-button disabled-button" : "list-item-control material-icons todo-button"}
                             onClick={this.handleRedoTransaction}
                         />
                         <AddBox id="add-item-button" className="list-item-control material-icons todo-button" 

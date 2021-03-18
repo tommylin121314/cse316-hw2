@@ -406,6 +406,8 @@ class App extends Component {
           redoTransactionCallback={this.redoTransaction}
           openModal={this.openModal}
           closeListCallback={this.closeList}
+          canUndo={this.tps.hasTransactionToUndo()}
+          canRedo={this.tps.hasTransactionToRedo()}
         />
       </div>
     );
