@@ -18,13 +18,20 @@ class ListLink extends Component {
         this.props.loadToDoListCallback(this.props.toDoList);
     }
 
+    handleOnBlur = (e) => {
+        let name = e.currentTarget.innerText;
+        this.props.changeListNameCallback(this.props.toDoList.id, name);
+    }
+
     render() {
         // DISPLAY WHERE WE ARE
         console.log("\t\t\tListLink render");
 
         return (
             <div 
-                className='todo-list-button'
+                onBlur={this.handleOnBlur}
+                contentEditable
+                className='todo-list-button overflow-scroll'
                 onClick={this.handleLoadList}
                 style={this.props.toDoList.highlighted ? {backgroundColor: '#ffc819', color: '#000000'} : {backgroundColor: '#353a44', color: '#e9edf0'}}
             >

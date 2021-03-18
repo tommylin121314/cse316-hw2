@@ -141,7 +141,7 @@ class App extends Component {
     })
 
     this.setState({
-      listOfLists: newListOfLists,
+      toDoLists: newListOfLists,
       currentList: newCurrentList,
       nextListItemId: this.state.nextListItemId + 1
     })
@@ -168,7 +168,7 @@ class App extends Component {
 
     this.setState({
       currentList: newCurrentList,
-      listOfLists: newListOfLists
+      toDoLists: newListOfLists
     })
 
     console.log(removedItem);
@@ -211,7 +211,7 @@ class App extends Component {
 
     this.setState({
       currentList: newCurrentList,
-      listOfLists: newListOfLists
+      toDoLists: newListOfLists
     })
   }
 
@@ -238,7 +238,7 @@ class App extends Component {
 
     this.setState({
       currentList: newCurrentList,
-      listOfLists: newListOfLists
+      toDoLists: newListOfLists
     })
 
   }
@@ -261,7 +261,7 @@ class App extends Component {
 
     this.setState({
       currentList: newCurrentList,
-      listOfLists: newListOfLists
+      toDoLists: newListOfLists
     })
 
   }
@@ -284,7 +284,7 @@ class App extends Component {
 
     this.setState({
       currentList: newCurrentList,
-      listOfLists: newListOfLists
+      toDoLists: newListOfLists
     })
   }
 
@@ -304,7 +304,7 @@ class App extends Component {
 
     this.setState({
       currentList: newCurrentList,
-      listOfLists: newListOfLists
+      toDoLists: newListOfLists
     })
 
   }
@@ -332,7 +332,7 @@ class App extends Component {
     console.log(newListOfLists);
 
     this.setState({
-      toDoList: newListOfLists,
+      toDoLists: newListOfLists,
       currentList: { items: [] },
       modalVisible: false
     })
@@ -346,10 +346,23 @@ class App extends Component {
     }
 
     this.setState({
-      toDoList: listOfLists,
+      toDoLists: listOfLists,
       currentList: { items: [] }
     })
 
+  }
+
+  changeListName = (id, name) => {
+    let newListsList = this.state.toDoLists;
+    for(let i = 0; i < newListsList.length; i++) {
+      if(newListsList[i].id === id) {
+        newListsList[i].name = name;
+      }
+    }
+
+    this.setState({
+      toDoLists: newListsList
+    })
   }
 
   indexOfId = (id) => {
@@ -393,6 +406,7 @@ class App extends Component {
           toDoLists={this.state.toDoLists}
           loadToDoListCallback={this.loadToDoList}
           addNewListCallback={this.addNewList}
+          changeListNameCallback={this.changeListName}
         />
         <Workspace 
           toDoListItems={items}
