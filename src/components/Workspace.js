@@ -12,6 +12,23 @@ class Workspace extends Component {
         super(props);
     }
 
+    componentWillMount() {
+        document.addEventListener("keydown", this.onKeyPressed);
+    }
+  
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.onKeyPressed);
+    }
+
+    onKeyPressed = (e) => {
+        if(e.key === 'z' && e.ctrlKey) {
+            this.props.undoTransactionCallback();
+        }
+        else if(e.key === 'y' && e.ctrlKey) {
+            this.props.redoTransactionCallback();
+        }
+    }
+
     handleAddNewItem = () => {
         this.props.addNewItemCallback();
     }
@@ -29,6 +46,7 @@ class Workspace extends Component {
     }
 
     render() {
+        console.log("rendering workspace\n" + "can undo?: " + this.props.canUndo + "\n" + "can redo?: " + this.props.canRedo);
         return (
             <div id="workspace">
                 <div id="todo-list-header-card" className="list-item-card">

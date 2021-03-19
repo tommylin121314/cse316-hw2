@@ -341,7 +341,7 @@ class App extends Component {
 
     this.setState({
       toDoLists: newListsList
-    })
+    }, this.afterToDoListsChangeComplete)
   }
 
   indexOfId = (id) => {
@@ -369,10 +369,6 @@ class App extends Component {
     // WILL THIS WORK? @todo
     let toDoListsString = JSON.stringify(this.state.toDoLists);
     localStorage.setItem("recentLists", toDoListsString);
-  }
-
-  afterToDoItemChangeComplete = () => {
-    
   }
 
   render() {
