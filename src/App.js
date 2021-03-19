@@ -371,10 +371,19 @@ class App extends Component {
     localStorage.setItem("recentLists", toDoListsString);
   }
 
+  handleKeyPress = (e) => {
+    if(e.ctrlKey && e.key === 'z') {
+      this.undoTransaction();
+    }
+    else if(e.ctrlKey && e.key == 'y') {
+      this.redoTransaction();
+    }
+  }
+
   render() {
     let items = this.state.currentList.items;
     return (
-      <div id="root">
+      <div onKeyDown={this.handleKeyPress} tabIndex={0} id="root">
         <DeleteModal 
           visible={this.state.modalVisible}
           closeModal={this.closeModal}

@@ -12,7 +12,7 @@ class Workspace extends Component {
         super(props);
     }
 
-    componentWillMount() {
+    /*componentWillMount() {
         document.addEventListener("keydown", this.onKeyPressed);
     }
   
@@ -28,6 +28,7 @@ class Workspace extends Component {
             this.props.redoTransactionCallback();
         }
     }
+    */
 
     handleAddNewItem = () => {
         this.props.addNewItemCallback();
